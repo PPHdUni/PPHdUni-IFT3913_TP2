@@ -1,0 +1,4 @@
+Médiane NCLOC: 145.03955
+Médiane DCP: 63.47137
+Médiane NOCom: 6.742089
+Médiane WMC: 38.808544
