@@ -15,21 +15,29 @@ public class EtudeMetrique {
 
         File jfreechart = new File("jfreechart-stats.csv");
         Scanner reader = new Scanner(jfreechart);
-        String line;
+        String lineRead,
+                lineWrite;
         String[] classe;
         reader.nextLine();
+        PrintWriter writer;
+
+        writer = new PrintWriter("etude_metrique.csv");
+        writer.println("NCLOC;DCP;NOCom;WMC;");
 
         while(reader.hasNextLine()) {
-            line = reader.nextLine();
-            classe = line.split(",");
+            lineRead = reader.nextLine();
+            classe = lineRead.split(",");
+            lineWrite = classe[1]+";"+classe[2].replace('.',',')+";"+classe[3]+";"+classe[4]+";";
+            writer.println(lineWrite);
             metriqueClasses.add(new Metrique(classe[0],Integer.parseInt(classe[1]),
                     Float.parseFloat(classe[2]),Integer.parseInt(classe[3]),Integer.parseInt(classe[4])));
         }
+        writer.close();
         reader.close();
 
-        PrintWriter writer = new PrintWriter("etude_metrique.txt");
-        BoiteAMoustache(writer);
-        writer.close();
+//        writer = new PrintWriter("etude_metrique.txt");
+//        BoiteAMoustache(writer);
+//        writer.close();
 
     }
 
@@ -42,6 +50,8 @@ public class EtudeMetrique {
             mediane[2] += metriqueClass.NOCom;
             mediane[3] += metriqueClass.WMC;
         }
+
+        System.out.println(metriqueClasses.size());
 
         for(int i = 0; i < mediane.length; i++)
         {
