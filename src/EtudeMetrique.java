@@ -47,14 +47,92 @@ public class EtudeMetrique {
         {
             mediane[i] = mediane[i]/ metriqueClasses.size();
         }
-//        writer.println("Médiane NCLOC: "+mediane[0]);
-//        writer.println("Médiane DCP: "+mediane[1]);
-//        writer.println("Médiane NOCom: "+mediane[2]);
-//        writer.println("Médiane WMC: "+mediane[3]);
 
-        writer.println("Médiane NCLOC: "+mediane[0]);
-        writer.println("Médiane DCP: "+mediane[1]);
-        writer.println("Médiane NOCom: "+mediane[2]);
-        writer.println("Médiane WMC: "+mediane[3]);
+        float[] quartSup = {0, 0, 0, 0};
+        int[] tailleSup = {0, 0, 0, 0};
+        float[] quartInf = {0, 0, 0, 0};
+        int[] tailleInf = {0, 0, 0, 0};
+        float[] longueur = new float[4],
+                limSup = new float[4],
+                limInf = new float[4];
+
+        float valeurMetrique=0;
+
+        for (Metrique metriqueClass : metriqueClasses) {
+
+            for(int i = 0; i < mediane.length; i++)
+            {
+                if(i==0) {valeurMetrique=metriqueClass.NLOC;}
+                if(i==1) {valeurMetrique=metriqueClass.DCP;}
+                if(i==2) {valeurMetrique=metriqueClass.NOCom;}
+                if(i==3) {valeurMetrique=metriqueClass.WMC;}
+
+                if(valeurMetrique>mediane[i]) {
+                    quartSup[i] += valeurMetrique;
+                    tailleSup[i]++;
+                }
+                if(valeurMetrique<mediane[i]) {
+                    quartInf[i] += valeurMetrique;
+                    tailleInf[i]++;
+                }
+            }
+        }
+
+        for(int i = 0; i < mediane.length; i++)
+        {
+            quartSup[i] = quartSup[i] / tailleSup[i];
+            quartInf[i] = quartInf[i] / tailleInf[i];
+            longueur[i] = quartSup[i] - quartInf[i];
+            limSup[i] = (float) (quartSup[i] + 1.5*longueur[i]);
+            limInf[i] = (float) (quartInf[i] - 1.5*longueur[i]);
+        }
+
+//        ArrayList<Metrique> nclocExt = new ArrayList<Metrique>();
+//        ArrayList<Metrique> dcpExt = new ArrayList<Metrique>();
+//        ArrayList<Metrique> nocomExt = new ArrayList<Metrique>();
+//        ArrayList<Metrique> wmcExt = new ArrayList<Metrique>();
+        ArrayList<Float>[] pointsExt = new ArrayList[4];
+        for(int i = 0; i < 4; i++)
+        {
+            pointsExt[i] = new ArrayList<Float>();
+        }
+
+        for (Metrique metriqueClass : metriqueClasses) {
+
+            for(int i = 0; i < 4; i++)
+            {
+                if(i==0) {valeurMetrique=metriqueClass.NLOC;}
+                if(i==1) {valeurMetrique=metriqueClass.DCP;}
+                if(i==2) {valeurMetrique=metriqueClass.NOCom;}
+                if(i==3) {valeurMetrique=metriqueClass.WMC;}
+
+                if(valeurMetrique>limSup[i] || valeurMetrique<limInf[i]) {
+                    pointsExt[i].add(valeurMetrique);
+                }
+            }
+        }
+
+        String metriqueType = "";
+        for(int i = 0; i < 4; i++)
+        {
+            if(i==0) {metriqueType = "NCLOC";}
+            if(i==1) {metriqueType = "DCP";}
+            if(i==2) {metriqueType = "NOCom";}
+            if(i==3) {metriqueType = "WMC";}
+
+            writer.println("Médiane de "+metriqueType+": "+mediane[i]);
+            writer.println("Quartile supérieure de "+metriqueType+": "+quartSup[i]);
+            writer.println("Quartile inférieure de "+metriqueType+": "+quartInf[i]);
+            writer.println("Longueur de "+metriqueType+": "+longueur[i]);
+            writer.println("Limite supérieure de "+metriqueType+": "+limSup[i]);
+            writer.println("Limite inférieure de "+metriqueType+": "+limInf[i]);
+            writer.print("Points extrêmes de "+metriqueType+": ");
+            for (Float pointExt : pointsExt[i]) {
+                writer.print(pointExt+", ");
+            }
+            writer.println();
+            writer.println();
+        }
+
     }
 }

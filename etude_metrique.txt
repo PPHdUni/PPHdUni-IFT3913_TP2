@@ -1,4 +1,32 @@
-Médiane NCLOC: 145.03955
-Médiane DCP: 63.47137
-Médiane NOCom: 6.742089
-Médiane WMC: 38.808544
+Médiane de NCLOC: 145.03955
+Quartile supérieure de NCLOC: 362.67004
+Quartile inférieure de NCLOC: 46.48046
+Longueur de NCLOC: 316.18958
+Limite supérieure de NCLOC: 836.9544
+Limite inférieure de NCLOC: -427.8039
+Points extrêmes de NCLOC: 1063.0, 1000.0, 2415.0, 1547.0, 988.0, 2732.0, 1235.0, 925.0, 974.0, 947.0, 1575.0, 1459.0, 
+
+Médiane de DCP: 63.47137
+Quartile supérieure de DCP: 82.162056
+Quartile inférieure de DCP: 50.40797
+Longueur de DCP: 31.754086
+Limite supérieure de DCP: 129.79318
+Limite inférieure de DCP: 2.776842
+Points extrêmes de DCP: 
+
+Médiane de NOCom: 6.742089
+Quartile supérieure de NOCom: 11.05814
+Quartile inférieure de NOCom: 3.764706
+Longueur de NOCom: 7.293434
+Limite supérieure de NOCom: 21.998291
+Limite inférieure de NOCom: -7.1754456
+Points extrêmes de NOCom: 22.0, 24.0, 32.0, 22.0, 27.0, 22.0, 24.0, 31.0, 30.0, 28.0, 22.0, 30.0, 
+
+Médiane de WMC: 38.808544
+Quartile supérieure de WMC: 89.97423
+Quartile inférieure de WMC: 16.146118
+Longueur de WMC: 73.82811
+Limite supérieure de WMC: 200.7164
+Limite inférieure de WMC: -94.59605
+Points extrêmes de WMC: 207.0, 300.0, 683.0, 327.0, 249.0, 802.0, 346.0, 201.0, 500.0, 461.0, 
+
