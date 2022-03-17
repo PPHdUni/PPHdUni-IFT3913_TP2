@@ -1,0 +1,6 @@
+Nombre de classes ayant un NOCom inférieure à 10 : 494
+Moyenne de la DCP des classes ayant un NOCom inférieure à 10 : 67.51805
+
+Nombre de classes ayant un NOCom supérieure à 10 : 108
+Moyenne de la DCP des classes ayant un NOCom supérieure à 10 : 48.18528
+

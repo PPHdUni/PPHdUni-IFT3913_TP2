@@ -39,6 +39,10 @@ public class EtudeMetrique {
 //        BoiteAMoustache(writer);
 //        writer.close();
 
+        writer = new PrintWriter("tp2#2.txt");
+        sondageDCPNOCom(writer);
+        writer.close();
+
     }
 
     private static void BoiteAMoustache(PrintWriter writer) {
@@ -143,6 +147,35 @@ public class EtudeMetrique {
             writer.println();
             writer.println();
         }
+
+    }
+
+    private static void sondageDCPNOCom(PrintWriter writer) {
+        int tailleNOComInf=0,
+                tailleNOComSup=0;
+        float moyDCPNOComInf = 0,
+                moyDCPNOComSup = 0;
+
+        for (Metrique metriqueClass : metriqueClasses) {
+            if (metriqueClass.NOCom<10) {
+                moyDCPNOComInf+=metriqueClass.DCP;
+                tailleNOComInf++;
+            }
+            if (metriqueClass.NOCom>10) {
+                moyDCPNOComSup+=metriqueClass.DCP;
+                tailleNOComSup++;
+            }
+        }
+        moyDCPNOComInf = moyDCPNOComInf/tailleNOComInf;
+        moyDCPNOComSup = moyDCPNOComSup/tailleNOComSup;
+
+        writer.println("Nombre de classes ayant un NOCom inférieure à 10 : "+tailleNOComInf);
+        writer.println("Moyenne de la DCP des classes ayant un NOCom inférieure à 10 : "+moyDCPNOComInf);
+        writer.println();
+
+        writer.println("Nombre de classes ayant un NOCom supérieure à 10 : "+tailleNOComSup);
+        writer.println("Moyenne de la DCP des classes ayant un NOCom supérieure à 10 : "+moyDCPNOComSup);
+        writer.println();
 
     }
 }
