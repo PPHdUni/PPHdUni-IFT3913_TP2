@@ -39,6 +39,14 @@ public class EtudeMetrique {
         sondageDCPNOCom(writer);
         writer.close();
 
+
+//        File spearman = new File("tp2#4.csv");
+//        reader = new Scanner(spearman);
+//        writer = new PrintWriter("tp2#4.txt");
+//        spearman(writer, reader);
+//        writer.close();
+//        reader.close();
+
     }
 
     private static void sondageDCPNOCom(PrintWriter writer) {
@@ -66,6 +74,50 @@ public class EtudeMetrique {
 
         writer.println("Nombre de classes ayant un NOCom supérieure à 10 : "+tailleNOComSup);
         writer.println("Moyenne de la DCP des classes ayant un NOCom supérieure à 10 : "+moyDCPNOComSup);
+        writer.println();
+
+    }
+
+    private static void spearman(PrintWriter writer, Scanner reader) {
+
+        String lineRead;
+        String[] lineDiv;
+        int i = 0,
+                n = metriqueClasses.size();
+        double[] d = new double[3],
+                coefSpearman = new double[3],
+                coefSpearman1 = {0,0,0},
+                coefSpearman2 = new double[3];
+        float[][] rangMetrique = new float[4][n];
+
+        reader.nextLine();
+        while(reader.hasNextLine()) {
+            lineRead = reader.nextLine();
+            lineDiv = lineRead.split(";");
+            for (int j=0; j<4;j++){
+                rangMetrique[j][i] = Float.parseFloat(lineDiv[5+j]);
+            }
+            i++;
+        }
+
+        for (i=0; i<n;i++){
+            for (int j=0; j<3;j++){
+                d[j] = rangMetrique[3][i] - rangMetrique[j][i];
+                coefSpearman1[j] += Math.pow(d[j], 2);
+            }
+        }
+
+        for (int j=0; j<3;j++){
+            coefSpearman2[j] = 6*coefSpearman1[j]/(n*(Math.pow(n, 2)-1));
+            coefSpearman[j] = 1 - coefSpearman2[j];
+            writer.println(coefSpearman1[j]);
+        }
+
+        writer.println("Le coefficient de Spearman entre WMC et NCLOC est : "+coefSpearman[0]);
+        writer.println();
+        writer.println("Le coefficient de Spearman entre WMC et DCP est : "+coefSpearman[1]);
+        writer.println();
+        writer.println("Le coefficient de Spearman entre WMC et NOCom est : "+coefSpearman[2]);
         writer.println();
 
     }
